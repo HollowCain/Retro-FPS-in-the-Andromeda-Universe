@@ -7,6 +7,7 @@ public class HeadBobbing : MonoBehaviour
     public float bobbingSpeed = 0.18f;
     public float bobbingHeight = 0.2f;
     public float midpoint = 1.8f;
+    public bool isHeadBobbing = true;
 
     private float timer = 0.0f;
 
@@ -38,11 +39,17 @@ public class HeadBobbing : MonoBehaviour
             float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
             totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
             translateChange = totalAxes * translateChange;
-            cSharpConversion.y = midpoint + translateChange;
+            if (isHeadBobbing == true)
+                cSharpConversion.y = midpoint + translateChange;
+            else if (isHeadBobbing == false)
+                cSharpConversion.x = translateChange;
         }
         else
         {
-            cSharpConversion.y = midpoint;
+            if (isHeadBobbing == true)
+                cSharpConversion.y = midpoint;
+            else if (isHeadBobbing == false)
+                cSharpConversion.x = 0;
         }
 
         transform.localPosition = cSharpConversion;
