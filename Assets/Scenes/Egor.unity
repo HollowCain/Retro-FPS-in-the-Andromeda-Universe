@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -951,6 +951,66 @@ MonoBehaviour:
   bobbingHeight: 0.08
   midpoint: 0.8
   isHeadBobbing: 1
+--- !u!1001 &1506226219
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1922016734134915242, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+      propertyPath: m_Name
+      value: Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022020513766010828, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.4201
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022020513766010828, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.2835
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022020513766010828, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.6384
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022020513766010828, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7244587
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022020513766010828, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.02030775
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022020513766010828, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.01658722
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022020513766010828, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.6888194
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022020513766010828, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.377
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022020513766010828, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 2.981
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022020513766010828, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -87.121
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1922016734134915242, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1690425050}
+  m_SourcePrefab: {fileID: 100100000, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
 --- !u!1 &1590605916
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +1022,7 @@ GameObject:
   - component: {fileID: 1590605918}
   - component: {fileID: 1590605917}
   - component: {fileID: 1590605921}
+  - component: {fileID: 1590605922}
   - component: {fileID: 1590605920}
   - component: {fileID: 1590605919}
   m_Layer: 6
@@ -1035,7 +1096,8 @@ Transform:
   m_LocalPosition: {x: 0.27, y: 0.64, z: 0.42}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2026180340}
   m_Father: {fileID: 773150449}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1590605919
@@ -1252,6 +1314,73 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1590605922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590605916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210c7fd6fa1d6914d967026153ca53a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1922016734134915242, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+  mainCamera: {fileID: 1343026234}
+  spawnBullet: {fileID: 2026180340}
+  shootForce: 20
+  spread: 0
+--- !u!1 &1690425049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1922016734134915242, guid: 6c1cd01950d53414ba9b6055cd3c881b, type: 3}
+  m_PrefabInstance: {fileID: 1506226219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1690425050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690425049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff2295f00c639d43ba6e58dd9c22f66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Live: 10
+  Timer: 0
+--- !u!1 &2026180339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2026180340}
+  m_Layer: 6
+  m_Name: SpawnBullet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2026180340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026180339}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.147, y: 0.127, z: 0.032}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1590605918}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2092867515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,3 +1458,4 @@ SceneRoots:
   - {fileID: 773150449}
   - {fileID: 463822099}
   - {fileID: 2092867518}
+  - {fileID: 1506226219}
