@@ -43,6 +43,20 @@ public class Player_Movement : MonoBehaviour
                 forwardMovement = Input.GetAxis("Vertical") * playerRunningSpeed;
                 sidewaysMovement = Input.GetAxis("Horizontal") * playerRunningSpeed;
             }
+
+            if(Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    Dynamic_Crosshair.spread = Dynamic_Crosshair.RUN_SPREAD;
+                } else
+                {
+                    Dynamic_Crosshair.spread = Dynamic_Crosshair.WALK_SPREAD;
+                }
+            }
+        } else
+        {
+            Dynamic_Crosshair.spread = Dynamic_Crosshair.JUMP_SPREAD;
         }
         
 
