@@ -23,6 +23,8 @@ public class Weapon_1 : MonoBehaviour
     int ammoLeft;
     int ammoClipLeft;
 
+    public GameObject bulletHole;
+
     bool isShot = false;
     bool isReloading;
 
@@ -39,11 +41,11 @@ public class Weapon_1 : MonoBehaviour
     {
         ammoText.text = ammoClipLeft + " / " + ammoLeft;
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && isReloading == false)
         {
             isShot = true;
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && isReloading == false)
         {
             Reload();
         }
@@ -51,11 +53,14 @@ public class Weapon_1 : MonoBehaviour
 
     void FixedUpdate()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector2 bulletOffset = UnityEngine.Random.insideUnitCircle * Dynamic_Crosshair.spread;
+        Vector3 randomTarget = new Vector3(Screen.width / 2 + bulletOffset.x, Screen.height / 2 + bulletOffset.y, 0);
+        Ray ray = Camera.main.ScreenPointToRay(randomTarget);
         RaycastHit hit;
         if(isShot == true && ammoClipLeft > 0 && isReloading == false)
         {
             isShot = false;
+            Dynamic_Crosshair.spread += Dynamic_Crosshair.PISTOL_SHOOTING_SPREAD;
             ammoClipLeft--;
             source.PlayOneShot(shotSound);
             StartCoroutine("shot");
@@ -63,6 +68,7 @@ public class Weapon_1 : MonoBehaviour
             {
                 Debug.Log("Colide with" + hit.collider.gameObject.name);
                 hit.collider.gameObject.SendMessage("pistolHit", weaponDamage, SendMessageOptions.DontRequireReceiver);
+                Instantiate(bulletHole, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
             }
         } else if(isShot == true && ammoClipLeft <= 0 && isReloading == false)
         {
