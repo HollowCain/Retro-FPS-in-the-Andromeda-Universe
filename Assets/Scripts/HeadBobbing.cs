@@ -13,46 +13,50 @@ public class HeadBobbing : MonoBehaviour
 
     void Update()
     {
-        if (!transform.parent.gameObject.GetComponent<CharacterController>().isGrounded) return;
-        float waveslice = 0.0f;
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        Vector3 cSharpConversion = transform.localPosition;
-
-        if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0)
+        if(Pause_Menu.isPaused == false)
         {
-            timer = 0.0f;
-        }
-        else
-        {
-            waveslice = Mathf.Sin(timer);
-            timer = timer + bobbingSpeed;
-            if (timer > Mathf.PI * 2)
+            if (!transform.parent.gameObject.GetComponent<CharacterController>().isGrounded) return;
+            float waveslice = 0.0f;
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+
+            Vector3 cSharpConversion = transform.localPosition;
+
+            if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0)
             {
-                timer = timer - (Mathf.PI * 2);
+                timer = 0.0f;
             }
-        }
-        if (waveslice != 0)
-        {
-            float translateChange = waveslice * bobbingHeight;
-            float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
-            totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
-            translateChange = totalAxes * translateChange;
-            if (isHeadBobbing == true)
-                cSharpConversion.y = midpoint + translateChange;
-            else if (isHeadBobbing == false)
-                cSharpConversion.x = translateChange;
-        }
-        else
-        {
-            if (isHeadBobbing == true)
-                cSharpConversion.y = midpoint;
-            else if (isHeadBobbing == false)
-                cSharpConversion.x = 0;
+            else
+            {
+                waveslice = Mathf.Sin(timer);
+                timer = timer + bobbingSpeed;
+                if (timer > Mathf.PI * 2)
+                {
+                    timer = timer - (Mathf.PI * 2);
+                }
+            }
+            if (waveslice != 0)
+            {
+                float translateChange = waveslice * bobbingHeight;
+                float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
+                totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
+                translateChange = totalAxes * translateChange;
+                if (isHeadBobbing == true)
+                    cSharpConversion.y = midpoint + translateChange;
+                else if (isHeadBobbing == false)
+                    cSharpConversion.x = translateChange;
+            }
+            else
+            {
+                if (isHeadBobbing == true)
+                    cSharpConversion.y = midpoint;
+                else if (isHeadBobbing == false)
+                    cSharpConversion.x = 0;
+            }
+
+            transform.localPosition = cSharpConversion;
         }
 
-        transform.localPosition = cSharpConversion;
     }
 
 
