@@ -41,7 +41,7 @@ public class Weapon_1 : MonoBehaviour
     {
         ammoText.text = ammoClipLeft + " / " + ammoLeft;
 
-        if (Input.GetButtonDown("Fire1") && isReloading == false)
+        if (Input.GetButtonDown("Fire1") && isReloading == false && Pause_Menu.isPaused == false)
         {
             isShot = true;
         }
