@@ -48,7 +48,7 @@ public class AlertState : IEnemyAI
     void Search()
     {
         enemy.navMeshAgent.destination = enemy.LastKnownPosition;
-        enemy.navMeshAgent.Resume();
+        enemy.navMeshAgent.isStopped = false;
     }
 
 

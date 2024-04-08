@@ -1,18 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public int health;
-    public bool canMeleeAttack;
-    public bool canShoot;
-    public float meleeDamage;
-    public float shootDamage;
+    public Sprite deadBody;
+    public int maxhealth;
+    float health;
 
-    public void WeaponHit(int damage)
+    EnemyStates es;
+    NavMeshAgent nma;
+    SpriteRenderer sr;
+    BoxCollider bc;
+    private void Start()
     {
-        Debug.Log("AAAAAAAAAAAAAAA");
-        health = health - damage;
+        health = maxhealth;
+        es = GetComponent<EnemyStates>();
+        nma = GetComponent<NavMeshAgent>();
+        sr = GetComponent<SpriteRenderer>();
+        bc = GetComponent<BoxCollider>();
+    }
+
+    private void Update()
+    {
+        if (health <= 0)
+        {
+            es.enabled = false;
+            nma.enabled = false;
+            sr.sprite = deadBody;
+            bc.center = new Vector3(0, -0.43f, 0);
+            bc.size = new Vector3(2.21f, 1.36f, 0.2f);
+        }
+    }
+
+    void WeaponHit(float damage)
+    {
+        health -= damage;
     }
 }

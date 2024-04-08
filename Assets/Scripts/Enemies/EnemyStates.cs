@@ -7,9 +7,20 @@ public class EnemyStates : MonoBehaviour
 {
     public Transform[] waypoints;
     public int patrolRange;
-    public int attackRange = 1;
+    public int shootRange;
+    public int attackRange;
     public Transform vision;
     public float stayAlertTime;
+
+    public GameObject missile;
+    public float missileDamage;
+    public float missileSpeed;
+
+    public bool onlyMelee = false;
+    public float meleeDamage;
+    public float attackDelay;
+
+    public LayerMask raycast;
 
     [HideInInspector]
     public AlertState alertState;
@@ -49,6 +60,13 @@ public class EnemyStates : MonoBehaviour
     void Update()
     {
         currentState.UpdateActions();
+    }
+
+    void HiddenShot(Vector3 shotPosition)
+    {
+        Debug.Log("Кто стреляет?");
+        LastKnownPosition = shotPosition;
+        currentState = alertState;
     }
 
 }

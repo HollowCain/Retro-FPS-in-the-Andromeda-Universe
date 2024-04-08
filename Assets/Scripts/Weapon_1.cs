@@ -8,6 +8,7 @@ using System;
 [RequireComponent(typeof(AudioSource))]
 public class Weapon_1 : MonoBehaviour
 {
+    public GameObject bloodSplat;
     public Sprite idlePistol;
     public Sprite shotPistol;
     public float weaponDamage;
@@ -64,11 +65,23 @@ public class Weapon_1 : MonoBehaviour
             ammoClipLeft--;
             source.PlayOneShot(shotSound);
             StartCoroutine("shot");
-            if(Physics.Raycast(ray, out hit, pistolRange))
+            if (Physics.Raycast(ray, out hit, pistolRange))
             {
-                Debug.Log("Colide with" + hit.collider.gameObject.name);
-                hit.collider.gameObject.SendMessage("pistolHit", weaponDamage, SendMessageOptions.DontRequireReceiver);
-                Instantiate(bulletHole, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                if (hit.transform.CompareTag("Enemy"))
+                {
+                    Instantiate(bloodSplat, hit.point, Quaternion.identity);    
+                    if (hit.collider.gameObject.GetComponent<EnemyStates>().currentState == hit.collider.gameObject.GetComponent<EnemyStates>().patrolState ||
+                        hit.collider.gameObject.GetComponent<EnemyStates>().currentState == hit.collider.gameObject.GetComponent<EnemyStates>().alertState)
+                    {
+                        hit.collider.gameObject.SendMessage("HiddenShot", transform.parent.transform.position, SendMessageOptions.DontRequireReceiver);
+                    }
+                    Debug.Log("Colide with" + hit.collider.gameObject.name);
+                    hit.collider.gameObject.SendMessage("WeaponHit", weaponDamage, SendMessageOptions.DontRequireReceiver);
+                }
+                else
+                {
+                    Instantiate(bulletHole, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal)).transform.parent = hit.collider.gameObject.transform;
+                }
             }
         } else if(isShot == true && ammoClipLeft <= 0 && isReloading == false)
         {

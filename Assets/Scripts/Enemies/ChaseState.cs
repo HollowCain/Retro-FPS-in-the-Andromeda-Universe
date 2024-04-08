@@ -20,7 +20,7 @@ public class ChaseState : IEnemyAI
     void Watch()
     {
         RaycastHit hit;
-        if (Physics.Raycast(enemy.transform.position, enemy.vision.forward, out hit, enemy.patrolRange) &&
+        if (Physics.Raycast(enemy.transform.position, enemy.vision.forward, out hit, enemy.patrolRange, enemy.raycast) &&
                 hit.collider.CompareTag("Player"))
         {
             enemy.chaseTarget = hit.transform;
@@ -35,9 +35,14 @@ public class ChaseState : IEnemyAI
     void Chase()
     {
         enemy.navMeshAgent.destination = enemy.chaseTarget.position;
-        enemy.navMeshAgent.Resume();
-        if(enemy.navMeshAgent.remainingDistance <= enemy.attackRange)
+        enemy.navMeshAgent.isStopped = false;
+        if(enemy.navMeshAgent.remainingDistance <= enemy.attackRange && enemy.onlyMelee == true)
         {
+            enemy.navMeshAgent.isStopped = true;
+            ToAttackState();
+        }else if (enemy.navMeshAgent.remainingDistance <= enemy.shootRange && enemy.onlyMelee == false)
+        {
+            enemy.navMeshAgent.isStopped = true;
             ToAttackState();
         }
     }
