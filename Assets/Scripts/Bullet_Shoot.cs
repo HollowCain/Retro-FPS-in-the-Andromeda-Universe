@@ -12,11 +12,7 @@ public class Bullet_Shoot : MonoBehaviour
     public float shootForce;
     public float spread;
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-            Shoot();
-    }
+
 
     private void Shoot()
     {
@@ -42,5 +38,11 @@ public class Bullet_Shoot : MonoBehaviour
 
         currentBullet.GetComponent<Rigidbody>().AddForce(dirWithSpread.normalized * shootForce, ForceMode.Impulse);
 
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+            Shoot();
     }
 }

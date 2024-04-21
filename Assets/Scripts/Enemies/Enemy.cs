@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void WeaponHit(float damage)
+    void AddDamage(float damage)
     {
         health -= damage;
     }
