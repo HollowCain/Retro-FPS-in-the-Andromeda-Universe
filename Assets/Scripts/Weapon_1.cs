@@ -37,7 +37,10 @@ public class Weapon_1 : MonoBehaviour
         ammoLeft = ammoAmount;
         ammoClipLeft = ammoClipSize;
     }
-
+    void OnEnable()
+    {
+        isReloading = false;
+    }
     void Update()
     {
         ammoText.text = ammoClipLeft + " / " + ammoLeft;
@@ -76,7 +79,7 @@ public class Weapon_1 : MonoBehaviour
                         hit.collider.gameObject.SendMessage("HiddenShot", transform.parent.transform.position, SendMessageOptions.DontRequireReceiver);
                     }
                     Debug.Log("Colide with" + hit.collider.gameObject.name);
-                    hit.collider.gameObject.SendMessage("WeaponHit", weaponDamage, SendMessageOptions.DontRequireReceiver);
+                    hit.collider.gameObject.SendMessage("AddDamage", weaponDamage, SendMessageOptions.DontRequireReceiver);
                 }
                 else
                 {
@@ -122,5 +125,10 @@ public class Weapon_1 : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = shotPistol;
         yield return new WaitForSeconds(0.1f);
         GetComponent<SpriteRenderer>().sprite = idlePistol;
+    }
+
+    public void AddAmmo(int value)
+    {
+        ammoLeft += value;
     }
 }
