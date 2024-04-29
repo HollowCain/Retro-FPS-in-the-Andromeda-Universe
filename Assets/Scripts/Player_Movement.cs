@@ -33,50 +33,60 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
-        float horizontalRotation = Input.GetAxis("Mouse X");
-        transform.Rotate(0, horizontalRotation, 0);
-
-        verticalRotation -= Input.GetAxis("Mouse Y");
-        verticalRotation = Mathf.Clamp(verticalRotation, -verticalRotationLimit, verticalRotationLimit);
-        Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
-
-        if (cc.isGrounded)
+        if (Pause_Menu.isPaused == false)
         {
-            forwardMovement = Input.GetAxis("Vertical") * playerWalkingSpeed;
-            sidewaysMovement = Input.GetAxis("Horizontal") * playerWalkingSpeed;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            float horizontalRotation = Input.GetAxis("Mouse X");
+            transform.Rotate(0, horizontalRotation, 0);
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            verticalRotation -= Input.GetAxis("Mouse Y");
+            verticalRotation = Mathf.Clamp(verticalRotation, -verticalRotationLimit, verticalRotationLimit);
+            Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+
+            if (cc.isGrounded)
             {
-                forwardMovement = Input.GetAxis("Vertical") * playerRunningSpeed;
-                sidewaysMovement = Input.GetAxis("Horizontal") * playerRunningSpeed;
-            }
-            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
-            {
+                forwardMovement = Input.GetAxis("Vertical") * playerWalkingSpeed;
+                sidewaysMovement = Input.GetAxis("Horizontal") * playerWalkingSpeed;
+
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
-                    Dynamic_Crosshair.spread = Dynamic_Crosshair.RUN_SPREAD;
+                    forwardMovement = Input.GetAxis("Vertical") * playerRunningSpeed;
+                    sidewaysMovement = Input.GetAxis("Horizontal") * playerRunningSpeed;
                 }
-                else
+                if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
                 {
-                    Dynamic_Crosshair.spread = Dynamic_Crosshair.WALK_SPREAD;
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        Dynamic_Crosshair.spread = Dynamic_Crosshair.RUN_SPREAD;
+                    }
+                    else
+                    {
+                        Dynamic_Crosshair.spread = Dynamic_Crosshair.WALK_SPREAD;
+                    }
                 }
             }
+            else
+            {
+                Dynamic_Crosshair.spread = Dynamic_Crosshair.JUMP_SPREAD;
+            }
+
+            verticalVelocity += Physics.gravity.y * Time.deltaTime;
+
+            if (Input.GetButton("Jump") && cc.isGrounded)
+            {
+                verticalVelocity = jumpStrength;
+            }
+
+            Vector3 playerMovement = new Vector3(sidewaysMovement, verticalVelocity, forwardMovement);
+
+            cc.Move(transform.rotation * playerMovement * Time.deltaTime);
         }
         else
         {
-            Dynamic_Crosshair.spread = Dynamic_Crosshair.JUMP_SPREAD;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
-
-        verticalVelocity += Physics.gravity.y * Time.deltaTime;
-
-        if (Input.GetButton("Jump") && cc.isGrounded)
-        {
-            verticalVelocity = jumpStrength;
-        }
-
-        Vector3 playerMovement = new Vector3(sidewaysMovement, verticalVelocity, forwardMovement);
-
-        cc.Move(transform.rotation * playerMovement * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
