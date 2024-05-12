@@ -46,6 +46,8 @@ public class PlayerHealth : MonoBehaviour
 
     void EnemyHit(float damage)
     {
+        Debug.Log("EnemyHit called with damage: " + damage);
+        Debug.Log("Initial armor: " + armor + ", Initial health: " + health);
         if (armor > 0 && armor >= damage)
         {
             armor -= damage;
@@ -60,8 +62,16 @@ public class PlayerHealth : MonoBehaviour
         {
             health -= damage;
         }
+        Debug.Log("Updated armor: " + armor + ", Updated health: " + health);
         source.PlayOneShot(hit);
-        flash.TookDamage();
+        if (flash != null)
+        {
+            flash.TookDamage();
+        }
+        else
+        {
+            Debug.LogError("Flash component is null");
+        }
     }
 
 }

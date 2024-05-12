@@ -23,6 +23,7 @@ public class Flashscreen : MonoBehaviour
 
     public void TookDamage()
     {
+        Debug.Log("TookDamage called");
         flashScreen.color = new Color(1, 0, 0, 0.8f);
     }
 
