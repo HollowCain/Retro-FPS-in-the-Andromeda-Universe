@@ -49,7 +49,7 @@ public class Weapon_1 : MonoBehaviour
         {
             isShot = true;
         }
-        if (Input.GetKeyDown(KeyCode.R) && isReloading == false && Pause_Menu.isPaused == false)
+        if (Input.GetKeyDown(KeyCode.R) && isReloading == false && Pause_Menu.isPaused == false && ammoClipLeft != ammoClipSize)
         {
             Reload();
         }

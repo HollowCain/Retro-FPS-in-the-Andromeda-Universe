@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5120923504312133822}
   - component: {fileID: 7668525928965994432}
   - component: {fileID: 6725098148629149349}
+  - component: {fileID: 8618613928014231801}
+  - component: {fileID: -6200964081498357977}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -208,3 +210,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad058649bebb0840a8a3b2a5a5093e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &8618613928014231801
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4413924011398785503}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 73781e1c2cbaf83409bcc3c6a5f799f4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-6200964081498357977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4413924011398785503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8366b5b5ca99b2449acb7c39e8a5cf38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0
