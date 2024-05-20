@@ -21,11 +21,4 @@ public class Explosion : MonoBehaviour
     {
         source.PlayOneShot(explosionSound);
     }
-
-    void Update()
-    {
-        lifespan += Time.deltaTime;
-        if (lifespan > 2)
-            Destroy(this.gameObject);
-    }
 }

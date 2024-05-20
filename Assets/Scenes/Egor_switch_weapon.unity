@@ -1435,7 +1435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55bbf4e6720c18e4b9863b3c77226919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 10000
   maxArmor: 50
   hit: {fileID: 8300000, guid: a38689e59a8b022429742edafb94bc00, type: 3}
   flash: {fileID: 289435579}
